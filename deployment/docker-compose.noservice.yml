@@ -1,0 +1,38 @@
+name: 'spring-boot-microservices'
+services:
+  bookdb:
+    container_name: bookdb_container
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./initBook:/docker-entrypoint-initdb.d
+    ports:
+      - "15431:5432"
+  bookclaimsdb:
+    container_name: bookclaimsdb_container
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./initBookclaim:/docker-entrypoint-initdb.d
+    ports:
+      - "15432:5432"
+  userdb:
+    container_name: userdb_container
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./initUser:/docker-entrypoint-initdb.d
+    ports:
+      - "15433:5432"
